@@ -59,21 +59,5 @@ Apache-2.0
 
 > Status: architecture documentation; implementation and deployment claims require independent verification.
 
-```mermaid
-flowchart LR
-  Author[Skill author] --> Draft[Skill manifest + files]
-  Draft --> Parse[Strict manifest parser]
-  Parse --> Schema{Schema valid?}
-  Schema -->|no| Reject[Reject with field errors]
-  Schema -->|yes| Policy[Capability and provenance checks]
-  Policy --> Review{Review required?}
-  Review -->|yes| Pending[Pending approval]
-  Review -->|no| Index[Build registry index]
-  Pending -->|approved| Index
-  Pending -->|rejected| Reject
-  Index --> Lookup[Name + version lookup]
-  Lookup --> Consumer[x4-agents consumer]
-  Consumer --> RuntimeGate[Consumer-side permission check]
-```
 **Evidence note:** Registry persistence, scoring, review, and consumer-side enforcement are shown as design boundaries; verify each is implemented before advertising it as available.
 
